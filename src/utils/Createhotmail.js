@@ -1,5 +1,7 @@
 import Getonesocks from "../utils/Getonesocks.js";
-import Emailcreate from "../utils/Emailcreate.js";
+// import Emailcreate from "../utils/Emailcreate.js";
+import Emailcreate from "../utils/Emailcreatetuta.js";
+
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const Createhotmail = async () => {

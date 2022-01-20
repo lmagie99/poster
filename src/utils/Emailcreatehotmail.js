@@ -1,7 +1,7 @@
-// import puppeteer from "puppeteer";
-import puppeteer from "puppeteer-extra";
-import StealthPlugin from "puppeteer-extra-plugin-stealth";
-puppeteer.use(StealthPlugin());
+import puppeteer from "puppeteer";
+// import puppeteer from "puppeteer-extra";
+// import StealthPlugin from "puppeteer-extra-plugin-stealth";
+// puppeteer.use(StealthPlugin());
 import faker from "@faker-js/faker";
 import { randomDate, rndNumber, rndString } from "../utils/Utils.js";
 import UserAgent from "user-agents";
@@ -12,31 +12,31 @@ const useragent =
 const ug2 =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4426.0 Safari/537.36";
 const ua3 =
-  "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4426.0 Safari/537.36";
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.10 Safari/537.36";
 const Emailcreate = async (socks) => {
-  const userAgent = new UserAgent({ platform: "Linux" });
-  console.log(userAgent);
-  await delay(10000);
+  // const userAgent = new UserAgent({ platform: "Linux" });
+  // console.log(userAgent);
+  // await delay(10000);
   try {
     const browser = await puppeteer.launch({
-      // executablePath: "/usr/bin/chromium",
+      executablePath: "/usr/bin/chromium",
       headless: false,
       slowMo: 400,
       defaultViewport: null,
       args: [
         `--proxy-server=socks5://${socks.socks}`,
-        `--user-agent=${userAgent.userAgent}`,
+        `--user-agent=${ua3}`,
         // "--start-fullscreen",
       ],
     });
     const emailpage = await browser.newPage();
     await emailpage.emulateTimezone(socks.ip.timezone);
-    // await emailpage.evaluateOnNewDocument(() => {
-    //   Object.defineProperty(navigator, "platform", {
-    //     get: () => "Win32",
-    //     // get: () => "MacIntel",
-    //   });
-    // });
+    await emailpage.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, "platform", {
+        // get: () => "Win32",
+        get: () => "MacIntel",
+      });
+    });
     // await emailemailpage.goto("https://i-know-you-faked-user-agent.glitch.me/");
     // await delay(5000);
     await emailpage.goto("https://duckduckgo.com/", {
