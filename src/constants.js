@@ -4,7 +4,7 @@ export const config = {
 };
 
 export const apilinks = {
-  checkforwork: "http://localhost:5444/api/worker/checkforwork",
+  checkforwork: "http://bc92-154-16-192-37.ngrok.io/api/worker/checkforwork",
   getthreesocksusa: "http://magicremotecontroller.work/socks/getthreesocksusa",
 };
 export const apiIp =

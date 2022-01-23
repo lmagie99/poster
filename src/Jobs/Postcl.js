@@ -1,5 +1,7 @@
 import Createhotmail from "../utils/Createhotmail.js";
+
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 const Postcl = async () => {
   console.log("Posting Cl...");
   const { email, socks, browser } = await Createhotmail();

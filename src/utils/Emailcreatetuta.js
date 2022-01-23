@@ -11,16 +11,15 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 //   "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36";
 // const ug2 =
 //   "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4426.0 Safari/537.36";
-const ua3 =
-  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36";
+// const ua3 =
+// "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36";
 
-const wsChromeEndpointurl =
-  "ws://127.0.0.1:9222/devtools/browser/baff1dae-6730-4eaa-a558-ceb01e58019e";
-const Emailcreate = async (socks) => {
+// const wsChromeEndpointurl =
+// "ws://127.0.0.1:9222/devtools/browser/b8ea58b2-2165-4baa-92ea-2f7ba4488278";
+const Emailcreate = async (wsChromeEndpointurl) => {
   // const userAgent = new UserAgent({ platform: "Linux" });
   // console.log(userAgent);
   // await delay(10000);
-  console.log("Socks: ", socks.socks, socks.ip.city);
   try {
     const browser = await puppeteer.connect({
       // executablePath: "/usr/bin/chromium",
@@ -28,7 +27,7 @@ const Emailcreate = async (socks) => {
       browserWSEndpoint: wsChromeEndpointurl,
       defaultViewport: null,
       devtools: true,
-      slowMo: 400,
+      slowMo: 250,
       // defaultViewport: null,
       // args: [
       //   `--proxy-server=socks5://${socks.socks}`,
@@ -37,7 +36,7 @@ const Emailcreate = async (socks) => {
       // ],
     });
     const emailpage = await browser.newPage();
-    await emailpage.emulateTimezone(socks.ip.timezone);
+    // await emailpage.emulateTimezone(socks.ip.timezone);
     // await emailpage.evaluateOnNewDocument(() => {
     //   Object.defineProperty(navigator, "platform", {
     //     // get: () => "Win32",
@@ -83,7 +82,7 @@ const Emailcreate = async (socks) => {
     console.log(firstName + " " + lastName);
     const makeemail = (
       firstName +
-      lastName +
+      // lastName +
       rndString(4) +
       rndNumber(3)
     ).toLowerCase();
@@ -162,7 +161,6 @@ const Emailcreate = async (socks) => {
 
     return {
       email,
-      browser,
     };
   } catch (error) {
     console.log(error);

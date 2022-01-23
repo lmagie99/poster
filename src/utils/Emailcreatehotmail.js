@@ -17,27 +17,33 @@ const Emailcreate = async (socks) => {
   // const userAgent = new UserAgent({ platform: "Linux" });
   // console.log(userAgent);
   // await delay(10000);
+  const wsChromeEndpointurl =
+    "ws://127.0.0.1:9222/devtools/browser/b8ea58b2-2165-4baa-92ea-2f7ba4488278";
+
   try {
-    const browser = await puppeteer.launch({
-      executablePath: "/usr/bin/chromium",
-      headless: false,
-      slowMo: 400,
+    const browser = await puppeteer.connect({
+      browserWSEndpoint: wsChromeEndpointurl,
       defaultViewport: null,
-      args: [
-        `--proxy-server=socks5://${socks.socks}`,
-        `--user-agent=${ua3}`,
-        // "--start-fullscreen",
-      ],
+      devtools: true,
+      // executablePath: "/usr/bin/chromium",
+      // headless: false,
+      slowMo: 400,
+      // defaultViewport: null,
+      // args: [
+      //   `--proxy-server=socks5://${socks.socks}`,
+      //   `--user-agent=${ua3}`,
+      //   // "--start-fullscreen",
+      // ],
     });
     const emailpage = await browser.newPage();
-    await emailpage.emulateTimezone(socks.ip.timezone);
-    await emailpage.evaluateOnNewDocument(() => {
-      Object.defineProperty(navigator, "platform", {
-        // get: () => "Win32",
-        get: () => "MacIntel",
-      });
-    });
-    // await emailemailpage.goto("https://i-know-you-faked-user-agent.glitch.me/");
+    // await emailpage.emulateTimezone(socks.ip.timezone);
+    // await emailpage.evaluateOnNewDocument(() => {
+    //   Object.defineProperty(navigator, "platform", {
+    //     // get: () => "Win32",
+    //     get: () => "MacIntel",
+    //   });
+    // });
+    // // await emailemailpage.goto("https://i-know-you-faked-user-agent.glitch.me/");
     // await delay(5000);
     await emailpage.goto("https://duckduckgo.com/", {
       waitUntil: "networkidle2",
